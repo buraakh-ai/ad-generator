@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Generator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #fff;
+            min-height: 100vh;
+            color: #1a0a00;
+        }
+
+        .nav {
+            background: #fff;
+            border-bottom: 1px solid #ffe8d6;
+            padding: 0 32px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-icon {
+            width: 30px;
+            height: 30px;
+            background: #f97316;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .nav-icon svg {
+                width: 16px;
+                height: 16px;
+            }
+
+        .nav-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a0a00;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            font-size: 13px;
+            color: #b06030;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-cta {
+            background: #f97316;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .hero {
+            padding: 52px 32px 44px;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff5ee 0%, #ffffff 100%);
+            border-bottom: 1px solid #ffe8d6;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #fff0e6;
+            border: 1px solid #ffd0a8;
+            border-radius: 20px;
+            padding: 5px 14px;
+            margin-bottom: 20px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            background: #f97316;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.6);
+                opacity: 0.4;
+            }
+        }
+
+        .hero-badge-text {
+            font-size: 11px;
+            font-weight: 700;
+            color: #c05010;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a0a00;
+            line-height: 1.15;
+            letter-spacing: -0.8px;
+            margin-bottom: 12px;
+        }
+
+            .hero-title span {
+                color: #f97316;
+            }
+
+        .hero-sub {
+            font-size: 15px;
+            color: #906040;
+            max-width: 480px;
+            margin: 0 auto 20px;
+            line-height: 1.65;
+        }
+
+        .hero-trust {
+            font-size: 12px;
+            color: #c08060;
+            margin-top: 4px;
+        }
+
+        .steps-strip {
+            background: #fff;
+            border-bottom: 1px solid #ffe8d6;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff0e6;
+            border: 1.5px solid #ffd0a8;
+            font-size: 11px;
+            font-weight: 700;
+            color: #f97316;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+            .step-num.active {
+                background: #f97316;
+                border-color: #f97316;
+                color: #fff;
+            }
+
+            .step-num.done {
+                background: #f97316;
+                border-color: #f97316;
+                color: #fff;
+            }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #b08060;
+        }
+
+            .step-label.active {
+                color: #1a0a00;
+            }
+
+        .step-arrow {
+            font-size: 13px;
+            color: #ffd0a8;
+        }
+
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px;
+        }
+
+        .form-card {
+            background: #fff;
+            border: 1.5px solid #ffe0c8;
+            border-radius: 16px;
+            padding: 28px 28px 24px;
+            margin-bottom: 28px;
+        }
+
+        .form-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a0a00;
+            margin-bottom: 22px;
+            letter-spacing: -0.2px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #905030;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 7px;
+            margin-top: 0;
+        }
+
+        .opt-tag {
+            font-size: 10px;
+            color: #c08060;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            background: #fff5ee;
+            padding: 1px 7px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: #fffaf7;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 10px;
+            padding: 11px 14px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1a0a00;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+            input:focus, textarea:focus {
+                border-color: #f97316;
+            }
+
+            input::placeholder, textarea::placeholder {
+                color: #c09070;
+                font-style: italic;
+            }
+
+        textarea {
+            resize: vertical;
+            min-height: 82px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+            .field:last-of-type {
+                margin-bottom: 0;
+            }
+
+        .url-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+            .url-row input {
+                flex: 1;
+            }
+
+        .url-badge {
+            font-size: 11px;
+            background: #fff0e6;
+            color: #c05010;
+            border: 1px solid #ffd0a8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            display: none;
+        }
+
+        button.generate {
+            width: 100%;
+            margin-top: 22px;
+            padding: 14px;
+            background: #f97316;
+            color: #fff;
+            border: none;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+            button.generate:hover {
+                background: #ea6a0a;
+            }
+
+            button.generate:active {
+                transform: scale(0.98);
+            }
+
+            button.generate:disabled {
+                background: #f0c0a0;
+                cursor: not-allowed;
+            }
+
+        @keyframes btnpop {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        button.generate.firing {
+            animation: btnpop 0.25s ease;
+        }
+
+        .company-banner {
+            display: none;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            align-items: center;
+            gap: 16px;
+        }
+
+            .company-banner img {
+                max-height: 50px;
+                max-width: 140px;
+                object-fit: contain;
+                border-radius: 6px;
+            }
+
+        .company-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a0a00;
+            margin-bottom: 2px;
+        }
+
+        .company-info p {
+            font-size: 12px;
+            color: #906040;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 48px;
+            display: none;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid #ffe0c8;
+            border-top-color: #f97316;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 14px;
+        }
+
+        .loading p {
+            color: #906040;
+            font-size: 14px;
+        }
+
+        .loading-steps {
+            font-size: 12px;
+            color: #c09070;
+            margin-top: 6px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            background: #fff0f0;
+            border: 1.5px solid #ffcccc;
+            border-radius: 10px;
+            padding: 14px;
+            color: #cc0000;
+            margin-top: 14px;
+            display: none;
+            font-size: 13px;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results-header {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1a0a00;
+            margin-bottom: 18px;
+            letter-spacing: -0.3px;
+        }
+
+        .event-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        #event-banner {
+            flex: 1;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-size: 13px;
+            color: #905030;
+            display: none;
+        }
+
+            #event-banner span.label {
+                font-weight: 700;
+            }
+
+        .retry-btn {
+            white-space: nowrap;
+            padding: 9px 16px;
+            background: #fff;
+            border: 1.5px solid #f97316;
+            color: #f97316;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+        }
+
+            .retry-btn:hover {
+                background: #f97316;
+                color: #fff;
+            }
+
+            .retry-btn:disabled {
+                border-color: #ffd0a8;
+                color: #ffd0a8;
+                cursor: not-allowed;
+            }
+
+        .quality-toggle {
+            font-size: 12px;
+            color: #c08060;
+            cursor: pointer;
+            text-decoration: underline;
+            display: none;
+            margin-bottom: 12px;
+        }
+
+        .quality-card {
+            display: none;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #f97316;
+        }
+
+        .quality-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .quality-badge {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            background: #f97316;
+            border-radius: 8px;
+            padding: 4px 12px;
+        }
+
+            .quality-badge.high {
+                background: #2e7d32;
+            }
+
+            .quality-badge.mid {
+                background: #f97316;
+            }
+
+            .quality-badge.low {
+                background: #c62828;
+            }
+
+        .quality-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a0a00;
+        }
+
+        .quality-reason {
+            font-size: 13px;
+            color: #905030;
+            line-height: 1.5;
+        }
+
+        #company-details-banner {
+            display: none;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+            #company-details-banner p {
+                font-weight: 700;
+                color: #905030;
+                margin-bottom: 10px;
+            }
+
+            #company-details-banner .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px 20px;
+            }
+
+                #company-details-banner .grid div {
+                    font-size: 12px;
+                    color: #7a5030;
+                }
+
+                #company-details-banner .grid span {
+                    font-weight: 600;
+                    color: #905030;
+                }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1.5px solid #ffe0c8;
+            border-radius: 14px;
+            padding: 20px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+            .card:hover {
+                border-color: #f97316;
+                box-shadow: 0 0 0 3px #fff0e6;
+            }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .platform {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 11px;
+            border-radius: 20px;
+        }
+
+        .tiktok {
+            background: #ffe0f0;
+            color: #c0006a;
+        }
+
+        .instagram {
+            background: #fff0e0;
+            color: #b05000;
+        }
+
+        .twitter {
+            background: #e0f0ff;
+            color: #005ab0;
+        }
+
+        .facebook {
+            background: #e0e8ff;
+            color: #0030b0;
+        }
+
+        .linkedin {
+            background: #e0eeff;
+            color: #0a66c2;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #3a2010;
+            line-height: 1.65;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1.5px solid #ffd0a8;
+            color: #c07040;
+            padding: 5px 12px;
+            border-radius: 7px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            width: auto;
+            margin-top: 0;
+            transition: all 0.15s;
+        }
+
+            .copy-btn:hover {
+                background: #fff0e6;
+                border-color: #f97316;
+                color: #f97316;
+            }
+
+        .provider-bar {
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .provider-label {
+            font-size: 12px;
+            color: #905030;
+            font-weight: 600;
+        }
+
+        .provider-badge {
+            font-size: 11px;
+            background: #f97316;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .provider-switch-btn {
+            font-size: 11px;
+            color: #f97316;
+            border: 1.5px solid #f97316;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            .provider-switch-btn:hover {
+                background: #f97316;
+                color: #fff;
+            }
+
+        .provider-alert {
+            display: none;
+            background: #fff8e6;
+            border: 1.5px solid #f5c842;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 16px;
+        }
+
+        .provider-alert-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #7a5800;
+            margin-bottom: 6px;
+        }
+
+        .provider-alert-msg {
+            font-size: 13px;
+            color: #7a5800;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .provider-alert-btn {
+            background: #f97316;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+            .provider-alert-btn:hover {
+                background: #ea6a0a;
+            }
+
+        .provider-alert-dismiss {
+            background: transparent;
+            border: 1.5px solid #c08060;
+            color: #905030;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .prompt-override {
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .prompt-override-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+            .prompt-override-header span {
+                font-size: 13px;
+                font-weight: 700;
+                color: #905030;
+            }
+
+        .toggle-arrow {
+            font-size: 12px;
+            color: #c08060;
+            transition: transform 0.2s;
+        }
+
+            .toggle-arrow.open {
+                transform: rotate(180deg);
+            }
+
+        .prompt-override-body {
+            display: none;
+            margin-top: 14px;
+        }
+
+            .prompt-override-body.open {
+                display: block;
+            }
+
+        .prompt-toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+            .prompt-toggle-row label {
+                font-size: 13px;
+                font-weight: 600;
+                color: #905030;
+                margin: 0;
+                text-transform: none;
+                letter-spacing: 0;
+            }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffd0a8;
+            border-radius: 22px;
+            transition: 0.2s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                left: 3px;
+                bottom: 3px;
+                background: white;
+                border-radius: 50%;
+                transition: 0.2s;
+            }
+
+        .switch input:checked + .slider {
+            background: #f97316;
+        }
+
+            .switch input:checked + .slider:before {
+                transform: translateX(18px);
+            }
+
+        #custom-prompt-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            background: #fffaf7;
+            color: #1a0a00;
+            outline: none;
+            transition: border 0.2s;
+            display: none;
+        }
+
+            #custom-prompt-input:focus {
+                border-color: #f97316;
+            }
+
+            #custom-prompt-input.active {
+                display: block;
+            }
+
+        .prompt-hint {
+            font-size: 11px;
+            color: #c08060;
+            margin-top: 6px;
+            display: none;
+        }
+
+            .prompt-hint.active {
+                display: block;
+            }
+
+        .prompt-auto-preview {
+            font-size: 12px;
+            color: #905030;
+            background: #fff;
+            border: 1px solid #ffd0a8;
+            border-radius: 8px;
+            padding: 10px 12px;
+            line-height: 1.5;
+            display: none;
+            word-break: break-word;
+        }
+
+            .prompt-auto-preview.active {
+                display: block;
+            }
+
+        .prompt-auto-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #c08060;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 6px;
+            display: none;
+        }
+
+            .prompt-auto-label.active {
+                display: block;
+            }
+
+        .image-section {
+            background: #fff;
+            border: 1.5px solid #ffe0c8;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+            .image-section h3 {
+                font-size: 15px;
+                font-weight: 700;
+                color: #1a0a00;
+                margin-bottom: 4px;
+            }
+
+        .img-subtitle {
+            font-size: 12px;
+            color: #c08060;
+            margin-bottom: 18px;
+        }
+
+        .image-single {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+            .image-single img {
+                width: 100%;
+                max-width: 400px;
+                border-radius: 10px;
+                display: block;
+                border: 1.5px solid #ffe0c8;
+            }
+
+        .img-loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #c08060;
+            font-size: 14px;
+        }
+
+        .spinner-sm {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffe0c8;
+            border-top-color: #f97316;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .img-btn {
+            padding: 10px 20px;
+            background: #f97316;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .img-btn:hover {
+                background: #ea6a0a;
+            }
+
+            .img-btn:disabled {
+                background: #f0c0a0;
+                cursor: not-allowed;
+            }
+
+        .download-link {
+            display: inline-block;
+            text-align: center;
+            padding: 9px 20px;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #905030;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+            .download-link:hover {
+                background: #fff0e6;
+            }
+
+        .image-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 4px;
+        }
+
+        #image-error {
+            color: #cc0000;
+            font-size: 12px;
+            display: none;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .platform-post-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .platform-post-card {
+            background: #fff;
+            border: 1.5px solid #ffe0c8;
+            border-radius: 14px;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+            .platform-post-card.visible {
+                display: flex;
+            }
+
+        .platform-post-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .platform-post-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .icon-instagram {
+            background: #fff0e0;
+        }
+
+        .icon-facebook {
+            background: #e0e8ff;
+        }
+
+        .icon-linkedin {
+            background: #e0eeff;
+        }
+
+        .platform-post-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a0a00;
+        }
+
+        .platform-post-sub {
+            font-size: 11px;
+            color: #c08060;
+        }
+
+        .post-status {
+            font-size: 12px;
+            text-align: center;
+            min-height: 18px;
+        }
+
+        .btn-post-instagram {
+            width: 100%;
+            padding: 10px;
+            background: #e1306c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-post-instagram:hover {
+                background: #c0255a;
+            }
+
+            .btn-post-instagram:disabled {
+                background: #f0a0b8;
+                cursor: not-allowed;
+            }
+
+        .btn-post-facebook {
+            width: 100%;
+            padding: 10px;
+            background: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-post-facebook:hover {
+                background: #1464d8;
+            }
+
+            .btn-post-facebook:disabled {
+                background: #a0b8e8;
+                cursor: not-allowed;
+            }
+
+        .btn-post-linkedin {
+            width: 100%;
+            padding: 10px;
+            background: #0a66c2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-post-linkedin:hover {
+                background: #0855a0;
+            }
+
+            .btn-post-linkedin:disabled {
+                background: #90b8e0;
+                cursor: not-allowed;
+            }
+
+        .new-event-prompt {
+            display: none;
+            background: #fff5ee;
+            border: 1.5px solid #ffd0a8;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: #905030;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+            .new-event-prompt p {
+                margin-bottom: 10px;
+                font-weight: 600;
+            }
+
+            .new-event-prompt .btn-row {
+                display: flex;
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .new-event-prompt button {
+                padding: 8px 16px;
+                border-radius: 7px;
+                font-size: 13px;
+                font-weight: 700;
+                cursor: pointer;
+                border: none;
+            }
+
+        .btn-keep {
+            background: #ffe0c8;
+            color: #905030;
+        }
+
+            .btn-keep:hover {
+                background: #ffd0b0;
+            }
+
+        .btn-regen-ev {
+            background: #f97316;
+            color: #fff;
+        }
+
+            .btn-regen-ev:hover {
+                background: #ea6a0a;
+            }
+
+        .stats-bar {
+            background: #fff;
+            border-top: 1px solid #ffe8d6;
+            border-bottom: 1px solid #ffe8d6;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .stat {
+            padding: 20px;
+            text-align: center;
+            border-right: 1px solid #ffe8d6;
+        }
+
+            .stat:last-child {
+                border-right: none;
+            }
+
+        .stat-num {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a0a00;
+            letter-spacing: -0.5px;
+        }
+
+            .stat-num .accent {
+                color: #f97316;
+            }
+
+        .stat-lbl {
+            font-size: 11px;
+            color: #b08060;
+            margin-top: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .footer {
+            background: linear-gradient(to top, #fff5ee 0%, #ffffff 100%);
+            border-top: 1px solid #ffe8d6;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #b08060;
+        }
+
+        .spark {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: sparkfly 0.8s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkfly {
+            0% {
+                transform: translate(0,0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-post-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .event-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #ffe8d6;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-logo">
+            <div class="nav-icon">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="nav-name">Ad Generator</span>
+        </div>
+        <div class="nav-right">
+            <a class="nav-link" href="#">How it works</a>
+            <a class="nav-cta" href="#">Get started</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-badge">
+            <div class="badge-dot"></div>
+            <span class="hero-badge-text">AI-powered ad copy</span>
+        </div>
+        <h1 class="hero-title">Ads that actually<br><span>convert.</span></h1>
+        <p class="hero-sub">Paste your website. Get platform-ready ad copy tied to real world events — in seconds.</p>
+        <p class="hero-trust">Trusted by marketers across every industry</p>
+    </div>
+
+    <div class="steps-strip">
+        <div class="step"><div class="step-num active" id="step1">1</div><span class="step-label active" id="step1-lbl">Enter details</span></div>
+        <span class="step-arrow">→</span>
+        <div class="step"><div class="step-num" id="step2">2</div><span class="step-label" id="step2-lbl">Generate</span></div>
+        <span class="step-arrow">→</span>
+        <div class="step"><div class="step-num" id="step3">3</div><span class="step-label" id="step3-lbl">Copy and post</span></div>
+    </div>
+
+    <div class="main">
+        <div class="form-card">
+            <div class="form-card-title">Generate your ads</div>
+            <div class="two-col">
+                <div class="field">
+                    <label>Company website URL <span class="opt-tag">optional</span></label>
+                    <div class="url-row">
+                        <input type="text" id="company_url" placeholder="e.g. https://www.nike.com" oninput="onUrlInput()">
+                        <span class="url-badge" id="url-badge">✓ Will scrape site</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Company name</label>
+                    <input type="text" id="company" placeholder="e.g. Nike">
+                </div>
+            </div>
+            <div class="field">
+                <label>What does your product do? <span class="opt-tag">optional — auto-filled from URL</span></label>
+                <textarea id="product" placeholder="e.g. High-performance running shoes designed for serious athletes"></textarea>
+            </div>
+            <div class="two-col">
+                <div class="field">
+                    <label>Your ad idea or angle <span class="opt-tag">optional</span></label>
+                    <textarea id="idea" placeholder="e.g. Show that our shoes help you go the distance no matter what"></textarea>
+                </div>
+                <div class="field">
+                    <label>Current event to connect to <span class="opt-tag">optional</span></label>
+                    <input type="text" id="event" placeholder="e.g. 2026 World Cup, Volleyball Nations League Finals, Summer Olympics...">
+                </div>
+            </div>
+            <button class="generate" onclick="generateAds()">&#9889; Generate ads</button>
+            <div class="error" id="error"></div>
+        </div>
+
+        <div class="company-banner" id="company-banner">
+            <img id="company-logo" src="" alt="Company logo" onerror="this.style.display='none'">
+            <div class="company-info"><h3 id="banner-name"></h3><p>Detected from website</p></div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Creating your ads...</p>
+            <p class="loading-steps" id="loading-step">Analyzing company...</p>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-header">Your ads are ready &#127919;</div>
+
+            <div class="event-row">
+                <div id="event-banner"><span class="label">&#9889; Trending event used:</span> <span id="event-text"></span></div>
+                <button class="retry-btn" id="retry-btn" onclick="retryEvent()">&#128260; Try different event</button>
+            </div>
+
+            <div class="quality-toggle" id="quality-toggle" onclick="toggleQuality()">&#128202; Show ad quality report</div>
+            <div class="quality-card" id="quality-card">
+                <div class="quality-header">
+                    <span class="quality-badge" id="quality-badge">—</span>
+                    <span class="quality-label">Ad quality score</span>
+                </div>
+                <p class="quality-reason" id="quality-reason"></p>
+            </div>
+
+            <div id="company-details-banner">
+                <p>&#127970; Company details used in generation</p>
+                <div class="grid">
+                    <div><span>What they do:</span> <span id="cd-what"></span></div>
+                    <div><span>Services:</span> <span id="cd-services"></span></div>
+                    <div><span>Target audience:</span> <span id="cd-audience"></span></div>
+                    <div><span>Brand tone:</span> <span id="cd-tone"></span></div>
+                    <div><span>Key values:</span> <span id="cd-values"></span></div>
+                    <div><span>Tagline:</span> <span id="cd-tagline"></span></div>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header"><span class="platform tiktok">TikTok / Reels</span><button class="copy-btn" onclick="copyText('tiktok-text', this)">Copy</button></div>
+                    <p id="tiktok-text"></p>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="platform instagram">Instagram</span><button class="copy-btn" onclick="copyText('instagram-text', this)">Copy</button></div>
+                    <p id="instagram-text"></p>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="platform twitter">X / Twitter</span><button class="copy-btn" onclick="copyText('twitter-text', this)">Copy</button></div>
+                    <p id="twitter-text"></p>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="platform facebook">Facebook</span><button class="copy-btn" onclick="copyText('facebook-text', this)">Copy</button></div>
+                    <p id="facebook-text"></p>
+                </div>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-header"><span class="platform linkedin">LinkedIn</span><button class="copy-btn" onclick="copyText('linkedin-text', this)">Copy</button></div>
+                    <p id="linkedin-text"></p>
+                </div>
+            </div>
+
+            <div class="provider-alert" id="provider-alert">
+                <div class="provider-alert-title" id="provider-alert-title">&#9888; Image model ran out of tokens</div>
+                <div class="provider-alert-msg" id="provider-alert-msg"></div>
+                <button class="provider-alert-btn" onclick="switchAndRegenerate()">Switch and regenerate</button>
+                <button class="provider-alert-dismiss" onclick="dismissProviderAlert()">Keep current image</button>
+            </div>
+
+            <div class="provider-bar" id="provider-bar">
+                <span class="provider-label">&#127912; Image model:</span>
+                <span class="provider-badge" id="provider-badge">Pollinations</span>
+                <button class="provider-switch-btn" onclick="showProviderSwitcher()">Switch model</button>
+            </div>
+
+            <div class="prompt-override" id="prompt-override">
+                <div class="prompt-override-header" onclick="togglePromptPanel()">
+                    <span>&#127912; Customize image prompt</span>
+                    <span class="toggle-arrow" id="prompt-arrow">▼</span>
+                </div>
+                <div class="prompt-override-body" id="prompt-override-body">
+                    <div class="prompt-toggle-row">
+                        <label class="switch">
+                            <input type="checkbox" id="use-custom-prompt" onchange="onPromptToggle()">
+                            <span class="slider"></span>
+                        </label>
+                        <label for="use-custom-prompt">Use my own image prompt</label>
+                    </div>
+                    <div class="prompt-auto-label" id="prompt-auto-label">Auto-generated prompt</div>
+                    <div class="prompt-auto-preview" id="prompt-auto-preview"></div>
+                    <textarea id="custom-prompt-input" placeholder="Describe the image you want, e.g. 'A confident business owner at a glass-walled office desk, golden hour lighting, city skyline behind them'"></textarea>
+                    <div class="prompt-hint" id="prompt-hint">This will override the auto-generated prompt. Click Regenerate below to apply.</div>
+                </div>
+            </div>
+
+            <div class="image-section" id="image-section">
+                <h3>&#127912; Your ad image</h3>
+                <p class="img-subtitle">Download and use across all platforms — optimised for Instagram, Facebook and LinkedIn feed.</p>
+                <div class="img-loading" id="img-loading"><div class="spinner-sm"></div> Generating image...</div>
+                <div id="image-error"></div>
+                <div class="image-single" id="image-single" style="display:none;">
+                    <img id="generated-image-clean" src="" alt="Ad image">
+                    <div class="image-actions">
+                        <button class="img-btn" id="regen-btn" onclick="regenerateImage()">Regenerate &#127912;</button>
+                        <a id="download-btn-clean" href="" download="ad-image.jpg" class="download-link">&#11015; Download image</a>
+                    </div>
+                </div>
+                <div class="new-event-prompt" id="new-event-prompt">
+                    <p>New event detected. Regenerate the image with new context?</p>
+                    <div class="btn-row">
+                        <button class="btn-keep" onclick="keepImage()">Keep current image</button>
+                        <button class="btn-regen-ev" onclick="regenWithNewEvent()">Regenerate with new event</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="platform-post-grid" id="platform-post-grid">
+                <div class="platform-post-card" id="card-instagram">
+                    <div class="platform-post-header">
+                        <div class="platform-post-icon icon-instagram">&#128247;</div>
+                        <div>
+                            <div class="platform-post-title">Instagram</div>
+                            <div class="platform-post-sub">Feed post — 4:5 portrait</div>
+                        </div>
+                    </div>
+                    <button class="btn-post-instagram" id="post-btn-instagram" onclick="postToInstagram()">Post to Instagram</button>
+                    <div class="post-status" id="status-instagram"></div>
+                </div>
+
+                <div class="platform-post-card" id="card-facebook">
+                    <div class="platform-post-header">
+                        <div class="platform-post-icon icon-facebook">&#128196;</div>
+                        <div>
+                            <div class="platform-post-title">Facebook</div>
+                            <div class="platform-post-sub">Page post — 4:5 portrait</div>
+                        </div>
+                    </div>
+                    <button class="btn-post-facebook" id="post-btn-facebook" onclick="postToFacebook()">Post to Facebook</button>
+                    <div class="post-status" id="status-facebook"></div>
+                </div>
+
+                <div class="platform-post-card" id="card-linkedin">
+                    <div class="platform-post-header">
+                        <div class="platform-post-icon icon-linkedin">&#128101;</div>
+                        <div>
+                            <div class="platform-post-title">LinkedIn</div>
+                            <div class="platform-post-sub">Company page — professional network</div>
+                        </div>
+                    </div>
+                    <button class="btn-post-linkedin" id="post-btn-linkedin" onclick="postToLinkedIn()">Post to LinkedIn</button>
+                    <div class="post-status" id="status-linkedin"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat"><div class="stat-num"><span id="counter">4,200,000</span></div><div class="stat-lbl">Ads generated</div></div>
+        <div class="stat"><div class="stat-num"><span class="accent">~</span>30s</div><div class="stat-lbl">Average generation</div></div>
+        <div class="stat"><div class="stat-num">4<span class="accent">/</span>4</div><div class="stat-lbl">Platforms covered</div></div>
+    </div>
+
+    <footer class="footer">
+        <span class="footer-text">Ad Generator — powered by AI</span>
+        <span class="footer-text">Built for marketers everywhere</span>
+    </footer>
+
+    <script>
+let lastGenerationData  = {};
+let pendingNextProvider = null;
+
+function onUrlInput() {
+    const url = document.getElementById('company_url').value.trim();
+    document.getElementById('url-badge').style.display = url.startsWith('http') ? 'inline-block' : 'none';
+}
+
+function setStep(n) {
+    for (let i = 1; i <= 3; i++) {
+        const num = document.getElementById('step' + i);
+        const lbl = document.getElementById('step' + i + '-lbl');
+        if (i < n) {
+            num.classList.add('done'); num.classList.remove('active');
+            num.textContent = '✓'; lbl.classList.remove('active');
+        } else if (i === n) {
+            num.classList.add('active'); num.classList.remove('done');
+            num.textContent = i; lbl.classList.add('active');
+        } else {
+            num.classList.remove('active', 'done');
+            num.textContent = i; lbl.classList.remove('active');
+        }
+    }
+}
+
+(function() {
+    const el = document.getElementById('counter');
+    let count = 4180000;
+    const target = 4200000;
+    const steps = 50;
+    const inc = (target - count) / steps;
+    let s = 0;
+    const t = setInterval(() => {
+        count += inc; s++;
+        el.textContent = Math.round(count).toLocaleString();
+        if (s >= steps) {
+            el.textContent = target.toLocaleString();
+            clearInterval(t);
+            setInterval(() => {
+                const cur = parseInt(el.textContent.replace(/,/g, ''));
+                el.textContent = (cur + Math.floor(Math.random() * 3) + 1).toLocaleString();
+            }, 4000);
+        }
+    }, 1800 / steps);
+})();
+
+function fireConfetti(btn) {
+    if (!btn) return;
+    btn.classList.add('firing');
+    setTimeout(() => btn.classList.remove('firing'), 300);
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const colors = ['#f97316','#fbbf24','#fb923c','#fdba74','#fff0e6','#fcd34d','#fed7aa'];
+    for (let i = 0; i < 24; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        const size = Math.random() * 9 + 5;
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 90 + 40;
+        spark.style.cssText = `width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;`;
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 800);
+    }
+}
+
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('button, .copy-btn, .retry-btn, .img-btn, .btn-post-instagram, .btn-post-facebook, .btn-post-linkedin, .btn-keep, .btn-regen-ev, .nav-cta');
+    if (btn) fireConfetti(btn);
+});
+
+function toggleQuality() {
+    const card   = document.getElementById('quality-card');
+    const toggle = document.getElementById('quality-toggle');
+    const visible = card.style.display === 'block';
+    card.style.display = visible ? 'none' : 'block';
+    toggle.textContent = visible ? '📊 Show ad quality report' : '📊 Hide ad quality report';
+}
+
+function updateProviderBadge(provider) {
+    const labels = { 'pollinations': 'Pollinations (Free)', 'huggingface': 'Hugging Face FLUX (Free)', 'openai': 'OpenAI DALL-E (Paid)' };
+    const bar   = document.getElementById('provider-bar');
+    const badge = document.getElementById('provider-badge');
+    if (bar && badge) { bar.style.display = 'flex'; badge.textContent = labels[provider] || provider; }
+}
+
+function showProviderAlert(failedProvider, nextProviderName, nextProviderLabel) {
+    pendingNextProvider = nextProviderName;
+    document.getElementById('provider-alert-title').textContent = `⚠️ ${failedProvider} ran out of tokens`;
+    document.getElementById('provider-alert-msg').textContent = `${failedProvider} is currently unavailable. Switch to ${nextProviderLabel} to continue generating images.`;
+    document.getElementById('provider-alert').style.display = 'block';
+}
+
+function dismissProviderAlert() {
+    document.getElementById('provider-alert').style.display = 'none';
+    pendingNextProvider = null;
+}
+
+async function switchAndRegenerate() {
+    if (!pendingNextProvider) return;
+    document.getElementById('provider-alert').style.display = 'none';
+    await fetch('/switch-image-provider', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({provider: pendingNextProvider}) });
+    pendingNextProvider = null;
+    generateImage(false);
+}
+
+async function showProviderSwitcher() {
+    const r    = await fetch('/get-image-providers');
+    const data = await r.json();
+    if (!data.success) return;
+    const labels = { 'pollinations': 'Pollinations (Free)', 'huggingface': 'Hugging Face FLUX (Free)', 'openai': 'OpenAI DALL-E (Paid)' };
+    const choice = prompt(`Current model: ${labels[data.active] || data.active}\n\nAvailable models:\n${data.providers.map(p => '- ' + (labels[p.name] || p.name)).join('\n')}\n\nType the model name to switch to (pollinations / huggingface / openai):`);
+    if (choice && data.providers.find(p => p.name === choice.trim())) {
+        await fetch('/switch-image-provider', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({provider: choice.trim()}) });
+        updateProviderBadge(choice.trim());
+        generateImage(false);
+    }
+}
+
+function showPostCards() {
+    ['card-instagram','card-facebook','card-linkedin'].forEach(id => {
+        document.getElementById(id).classList.add('visible');
+    });
+    ['status-instagram','status-facebook','status-linkedin'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '';
+        el.style.color = '';
+    });
+}
+
+function hidePostCards() {
+    ['card-instagram','card-facebook','card-linkedin'].forEach(id => {
+        document.getElementById(id).classList.remove('visible');
+    });
+}
+
+function applyResults(data, company, event) {
+    document.getElementById('tiktok-text').textContent    = data.ads.tiktok    || '';
+    document.getElementById('instagram-text').textContent = data.ads.instagram  || '';
+    document.getElementById('twitter-text').textContent   = data.ads.twitter    || '';
+    document.getElementById('facebook-text').textContent  = data.ads.facebook   || '';
+    document.getElementById('linkedin-text').textContent  = data.ads.linkedin   || data.ads.facebook || '';
+
+    lastGenerationData.instagram_copy  = data.ads.instagram  || '';
+    lastGenerationData.facebook_copy   = data.ads.facebook   || '';
+    lastGenerationData.linkedin_copy   = data.ads.linkedin   || data.ads.facebook || '';
+    lastGenerationData.image_headline  = data.image_headline || '';
+    lastGenerationData.company_name    = data.detected_company_name || company;
+    lastGenerationData.event_context   = data.detected_event || event || '';
+    lastGenerationData.company_details = data.company_details || {};
+    lastGenerationData.logo_url        = data.company_details?.logo_url || null;
+    lastGenerationData.company_url     = document.getElementById('company_url').value.trim();
+
+    if (data.detected_event) {
+        document.getElementById('event-text').textContent = data.detected_event;
+        document.getElementById('event-banner').style.display = 'block';
+        document.getElementById('retry-btn').style.display = 'inline-block';
+    }
+
+    const score = data.quality_score || 0;
+    if (score > 0) {
+        const badge = document.getElementById('quality-badge');
+        badge.textContent = score + '/10';
+        badge.className = 'quality-badge ' + (score >= 8 ? 'high' : score >= 5 ? 'mid' : 'low');
+        document.getElementById('quality-reason').textContent = data.quality_reason || '';
+        document.getElementById('quality-toggle').style.display = 'block';
+        document.getElementById('quality-card').style.display = 'none';
+    }
+
+    if (data.company_details && Object.keys(data.company_details).length > 0) {
+        const cd = data.company_details;
+        document.getElementById('cd-what').textContent     = cd.what_they_do || '—';
+        document.getElementById('cd-services').textContent = cd.services || '—';
+        document.getElementById('cd-audience').textContent = cd.target_audience || '—';
+        document.getElementById('cd-tone').textContent     = cd.brand_tone || '—';
+        document.getElementById('cd-values').textContent   = cd.key_values || '—';
+        document.getElementById('cd-tagline').textContent  = cd.tagline || '—';
+        document.getElementById('company-details-banner').style.display = 'block';
+    }
+
+    if (data.detected_company_name) {
+        document.getElementById('banner-name').textContent = data.detected_company_name;
+        document.getElementById('company-banner').style.display = 'flex';
+        if (data.company_details?.logo_url) document.getElementById('company-logo').src = data.company_details.logo_url;
+    }
+}
+
+async function generateAds() {
+    const btn     = document.querySelector('.generate');
+    const company = document.getElementById('company').value.trim();
+    const product = document.getElementById('product').value.trim();
+    const idea    = document.getElementById('idea').value.trim();
+    const event   = document.getElementById('event').value.trim();
+    const url     = document.getElementById('company_url').value.trim();
+
+    if (!company && !url) { showError('Please fill in at least the company name or website URL.'); return; }
+
+    fireConfetti(btn);
+    setStep(2);
+
+    document.getElementById('error').style.display               = 'none';
+    document.getElementById('results').style.display             = 'none';
+    document.getElementById('company-banner').style.display      = 'none';
+    document.getElementById('image-section').style.display       = 'none';
+    document.getElementById('image-single').style.display        = 'none';
+    document.getElementById('new-event-prompt').style.display    = 'none';
+    document.getElementById('quality-card').style.display        = 'none';
+    document.getElementById('quality-toggle').style.display      = 'none';
+    document.getElementById('company-details-banner').style.display = 'none';
+    document.getElementById('provider-alert').style.display      = 'none';
+    document.getElementById('provider-bar').style.display        = 'none';
+    document.getElementById('image-error').style.display         = 'none';
+    hidePostCards();
+    document.getElementById('loading').style.display = 'block';
+    btn.disabled = true;
+
+    document.getElementById('loading-step').textContent = url ? 'Scraping company website...' : 'Researching company and detecting trending events...';
+
+    try {
+        const response = await fetch('/generate', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ company_name: company, product_description: product, ad_idea: idea, event_context: event || null, company_url: url || null })
+        });
+        const data = await response.json();
+
+        if (data.provider_switched) {
+            showError(`Text model switched from ${data.from_provider} to ${data.to_provider} due to quota limits. Please try generating again.`);
+            setStep(1);
+        } else if (data.exhausted) {
+            showError('All text generation models are exhausted. Please try again later or add more API keys.');
+            setStep(1);
+        } else if (data.success) {
+            applyResults(data, company, event);
+            setStep(3);
+            document.getElementById('results').style.display       = 'block';
+            document.getElementById('image-section').style.display = 'block';
+            showPromptOverride();
+            generateImage(true);
+        } else {
+            setStep(1);
+            showError('Error: ' + data.error);
+        }
+    } catch (err) {
+        setStep(1);
+        showError('Something went wrong. Make sure app.py is running.');
+    }
+
+    document.getElementById('loading').style.display = 'none';
+    btn.disabled = false;
+}
+
+async function retryEvent() {
+    const retryBtn = document.getElementById('retry-btn');
+    retryBtn.disabled = true;
+    retryBtn.textContent = '⏳ Finding new event...';
+    document.getElementById('new-event-prompt').style.display = 'none';
+    try {
+        const response = await fetch('/retry-event', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ company_name: lastGenerationData.company_name || '', company_url: lastGenerationData.company_url || '' })
+        });
+        const data = await response.json();
+        if (data.success) {
+            applyResults(data, lastGenerationData.company_name, '');
+            if (document.getElementById('image-single').style.display !== 'none') {
+                document.getElementById('new-event-prompt').style.display = 'block';
+            }
+        } else { alert('Could not get a new event: ' + data.error); }
+    } catch (err) { alert('Something went wrong retrying the event.'); }
+    retryBtn.disabled = false;
+    retryBtn.textContent = '🔄 Try different event';
+}
+
+function keepImage() { document.getElementById('new-event-prompt').style.display = 'none'; }
+function regenWithNewEvent() { document.getElementById('new-event-prompt').style.display = 'none'; generateImage(false); }
+async function regenerateImage() { generateImage(false); }
+
+async function generateImage(isAuto = false) {
+    const imgLoading = document.getElementById('img-loading');
+    const imgSingle  = document.getElementById('image-single');
+    const imageError = document.getElementById('image-error');
+    const regenBtn   = document.getElementById('regen-btn');
+
+    imgSingle.style.display  = 'none';
+    imgLoading.style.display = 'block';
+    imageError.style.display = 'none';
+    imageError.textContent   = '';
+    hidePostCards();
+    document.getElementById('provider-alert').style.display = 'none';
+    if (regenBtn) regenBtn.disabled = true;
+
+    try {
+        const useCustom    = document.getElementById('use-custom-prompt').checked;
+        const customPrompt = useCustom ? document.getElementById('custom-prompt-input').value.trim() : '';
+        const response = await fetch('/generate-image', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                company_name:    lastGenerationData.company_name    || '',
+                instagram_copy:  lastGenerationData.instagram_copy  || '',
+                image_headline:  lastGenerationData.image_headline  || '',
+                event_context:   lastGenerationData.event_context   || '',
+                company_details: lastGenerationData.company_details || {},
+                logo_url:        lastGenerationData.logo_url        || null,
+                custom_prompt:   customPrompt
+            })
+        });
+        const data = await response.json();
+        const ts   = '?t=' + Date.now();
+
+        if (data.success) {
+            document.getElementById('generated-image-clean').src = data.clean_image_url + ts;
+            document.getElementById('download-btn-clean').href   = data.clean_image_url;
+            imgSingle.style.display = 'flex';
+            updateProviderBadge(data.provider || 'pollinations');
+            showPostCards();
+        } else if (data.provider_failed) {
+            showProviderAlert(data.failed_provider, data.next_provider_name, data.next_provider_label);
+            imageError.textContent   = `${data.failed_provider} failed. Switch to ${data.next_provider_label} to continue.`;
+            imageError.style.display = 'block';
+        } else {
+            imageError.textContent   = 'Image error: ' + data.error;
+            imageError.style.display = 'block';
+        }
+    } catch (err) {
+        imageError.textContent   = 'Something went wrong generating the image.';
+        imageError.style.display = 'block';
+    }
+
+    imgLoading.style.display = 'none';
+    if (regenBtn) regenBtn.disabled = false;
+}
+
+async function postToInstagram() {
+    const btn      = document.getElementById('post-btn-instagram');
+    const status   = document.getElementById('status-instagram');
+    const cleanImg = document.getElementById('generated-image-clean');
+    if (!cleanImg.src) { status.textContent = 'Generate an image first.'; status.style.color = '#cc0000'; return; }
+    btn.disabled = true; btn.textContent = '⏳ Posting...'; status.textContent = '';
+    const caption  = document.getElementById('instagram-text').textContent || '';
+    const imageUrl = cleanImg.src.split('?')[0];
+    try {
+        const r    = await fetch('/post-to-instagram', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ caption, image_url: imageUrl }) });
+        const data = await r.json();
+        if (data.success) { status.textContent = '✅ Posted successfully!'; status.style.color = '#2e7d32'; }
+        else              { status.textContent = 'Error: ' + data.error;    status.style.color = '#cc0000'; }
+    } catch (err) { status.textContent = 'Something went wrong.'; status.style.color = '#cc0000'; }
+    btn.disabled = false; btn.textContent = 'Post to Instagram';
+}
+
+async function postToFacebook() {
+    const btn      = document.getElementById('post-btn-facebook');
+    const status   = document.getElementById('status-facebook');
+    const cleanImg = document.getElementById('generated-image-clean');
+    if (!cleanImg.src) { status.textContent = 'Generate an image first.'; status.style.color = '#cc0000'; return; }
+    btn.disabled = true; btn.textContent = '⏳ Posting...'; status.textContent = '';
+    const caption  = document.getElementById('facebook-text').textContent || '';
+    const imageUrl = cleanImg.src.split('?')[0];
+    try {
+        const r    = await fetch('/post-to-facebook', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ caption, image_url: imageUrl }) });
+        const data = await r.json();
+        if (data.success) { status.textContent = '✅ Posted successfully!'; status.style.color = '#2e7d32'; }
+        else              { status.textContent = 'Error: ' + data.error;    status.style.color = '#cc0000'; }
+    } catch (err) { status.textContent = 'Something went wrong.'; status.style.color = '#cc0000'; }
+    btn.disabled = false; btn.textContent = 'Post to Facebook';
+}
+
+async function postToLinkedIn() {
+    const btn      = document.getElementById('post-btn-linkedin');
+    const status   = document.getElementById('status-linkedin');
+    const cleanImg = document.getElementById('generated-image-clean');
+    if (!cleanImg.src) { status.textContent = 'Generate an image first.'; status.style.color = '#cc0000'; return; }
+    btn.disabled = true; btn.textContent = '⏳ Posting...'; status.textContent = '';
+    const caption  = document.getElementById('linkedin-text').textContent || '';
+    const imageUrl = cleanImg.src.split('?')[0];
+    try {
+        const r    = await fetch('/post-to-linkedin', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ caption, image_url: imageUrl }) });
+        const data = await r.json();
+        if (data.success) { status.textContent = '✅ Posted successfully!'; status.style.color = '#2e7d32'; }
+        else              { status.textContent = 'Error: ' + data.error;    status.style.color = '#cc0000'; }
+    } catch (err) { status.textContent = 'Something went wrong.'; status.style.color = '#cc0000'; }
+    btn.disabled = false; btn.textContent = 'Post to LinkedIn';
+}
+
+function copyText(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = orig, 1800);
+}
+
+function showError(msg) {
+    const el = document.getElementById('error');
+    el.textContent = msg; el.style.display = 'block';
+}
+
+function togglePromptPanel() {
+    const body  = document.getElementById('prompt-override-body');
+    const arrow = document.getElementById('prompt-arrow');
+    const open  = body.classList.toggle('open');
+    arrow.classList.toggle('open', open);
+    if (open && document.getElementById('prompt-auto-preview').textContent === '') buildAutoPromptPreview();
+}
+function onPromptToggle() {
+    const useCustom = document.getElementById('use-custom-prompt').checked;
+    document.getElementById('custom-prompt-input').classList.toggle('active', useCustom);
+    document.getElementById('prompt-hint').classList.toggle('active', useCustom);
+    document.getElementById('prompt-auto-preview').classList.toggle('active', !useCustom);
+    document.getElementById('prompt-auto-label').classList.toggle('active', !useCustom);
+    if (!useCustom) buildAutoPromptPreview();
+}
+function buildAutoPromptPreview() {
+    const d = lastGenerationData;
+    if (!d.company_name) return;
+    const services  = d.company_details?.services   || '';
+    const brandTone = d.company_details?.brand_tone || 'professional';
+    const event     = d.event_context || '';
+    document.getElementById('prompt-auto-preview').textContent = `Auto-generated based on: industry (${services || d.company_name}), brand tone (${brandTone}), event (${event || 'none'}).`;
+    document.getElementById('prompt-auto-preview').classList.add('active');
+    document.getElementById('prompt-auto-label').classList.add('active');
+}
+function showPromptOverride() {
+    document.getElementById('prompt-override').style.display = 'block';
+    document.getElementById('use-custom-prompt').checked = false;
+    document.getElementById('custom-prompt-input').classList.remove('active');
+    document.getElementById('prompt-hint').classList.remove('active');
+    document.getElementById('prompt-auto-preview').textContent = '';
+    document.getElementById('prompt-auto-preview').classList.remove('active');
+    document.getElementById('prompt-auto-label').classList.remove('active');
+    document.getElementById('prompt-override-body').classList.remove('open');
+    document.getElementById('prompt-arrow').classList.remove('open');
+}
+    </script>
+</body>
+</html>

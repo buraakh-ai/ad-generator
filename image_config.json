@@ -1,0 +1,36 @@
+{
+  "_instructions": {
+    "providers": "List of image providers in fallback order. First one is used by default.",
+    "active_provider": "Set to the provider you want to use.",
+    "provider_options": [ "pollinations", "huggingface", "openai" ],
+    "prompt_prefix": "Text prepended to every generated prompt.",
+    "prompt_suffix": "Text appended to every generated prompt.",
+    "override_prompt": "If not blank this EXACT text is used as the full prompt. Leave blank for normal operation."
+  },
+
+  "active_provider": "pollinations",
+  "providers": [
+    {
+      "name": "pollinations",
+      "label": "Pollinations (Free)",
+      "enabled": true,
+      "api_key": ""
+    },
+    {
+      "name": "huggingface",
+      "label": "Hugging Face FLUX (Free)",
+      "enabled": true,
+      "api_key": "your-huggingface-token-here"
+    },
+    {
+      "name": "openai",
+      "label": "OpenAI DALL-E (Paid)",
+      "enabled": false,
+      "api_key": ""
+    }
+  ],
+
+  "prompt_prefix": "",
+  "prompt_suffix": "",
+  "override_prompt": ""
+}

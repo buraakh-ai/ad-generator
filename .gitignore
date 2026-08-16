@@ -1,0 +1,36 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Visual Studio / VS Code local files
+.vs/
+.vscode/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Credentials / tokens
+credentials.json
+token.json
+*.pem
+*.key
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+
+static/generated_ad.jpg
+static/generated_ad_clean.jpg
+static/instagram_chrome.png
