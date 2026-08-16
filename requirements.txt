@@ -1,0 +1,9 @@
+Flask
+requests
+boto3
+Pillow
+urllib3
+python-dotenv
+google-genai
+huggingface_hub
+feedparser
